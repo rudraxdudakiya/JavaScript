@@ -1,0 +1,6 @@
+# Ignore all files by default
+* linguist-detectable=false
+
+# Only include JavaScript and HTML files
+*.js linguist-detectable=true
+*.html linguist-detectable=true
