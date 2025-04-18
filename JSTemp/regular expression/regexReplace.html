@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<h2>JavaScript Regular Expressions</h2>
+
+<h1>Modifiers can be used to perform case-insensitive more global searches:
+
+</h1>
+<button onclick="myFunction()">Click to replace!!</button>
+<p id="demo">Demo of Regular expression regular !!</p>
+
+<script>
+function myFunction() {
+  var str = document.getElementById("demo").innerHTML; 
+  //var txt = str.replace("regular","Reg");
+
+  var txt = str.replace(/regular/ig,"Reg"); //modifiers i(case-insensitive),g(global),m (multiline match)
+  document.getElementById("demo").innerHTML = txt;
+}
+</script>
+
+</body>
+</html>

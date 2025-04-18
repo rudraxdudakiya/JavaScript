@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Table</h1>
+<script>
+
+var smartPhones = [
+      { name:'iphone', price:60000 },
+      { name:'Galaxy S6', price:25000 },
+      { name:'Galaxy Note 5', price:30000 }
+    ];
+function click1()
+{	
+	let t1=document.getElementById("t1");
+	t1.border="1";
+	let r1=t1.insertRow();
+	let c1=r1.insertCell();
+	c1.appendChild(document.createTextNode("Mobile name"))
+
+	let c2=r1.insertCell();
+	c2.appendChild(document.createTextNode("Price"))
+
+	for(let i=0;i<smartPhones.length;i++)
+	{
+		let dr=t1.insertRow();
+
+		let dc1=dr.insertCell();
+		dc1.appendChild(document.createTextNode(smartPhones[i].name))
+
+		let dc2=dr.insertCell();
+		dc2.appendChild(document.createTextNode(smartPhones[i].price))
+	}
+}
+</script>
+<button type="button" onclick="click1()">Click</button>
+
+<table id="t1">
+	
+</table>
+
+
+</body>
+</html>

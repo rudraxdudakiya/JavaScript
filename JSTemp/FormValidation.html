@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="JSTEMP/validation2.js"></script>
+    <script>
+        function validate_form()
+        {
+            let name1=document.getElementById("name1");
+            let email=document.getElementById("email1");
+            let mobile=document.getElementById("mobile");
+
+            let div_name=document.getElementById("err_name");
+            let div_email=document.getElementById("err_email");
+            let div_mobile=document.getElementById("err_mobile");
+            let valid_form_flag=true;
+            if(!validate_name(name1,div_name))
+            {
+                valid_form_flag=false;
+            }
+            if(!validate_email(email,div_email))
+            {
+                valid_form_flag=false;
+            }
+            if(!validate_mobile(mobile,div_mobile))
+            {
+                valid_form_flag=false;
+            }
+            if(valid_form_flag==false)
+            {
+                document.getElementById("result").innerHTML="Invalid form data";
+                //return false;
+            }
+            else
+            {
+                document.getElementById("result").innerHTML="VALID form data";
+                //return true;
+            } 
+            return false;
+        }
+        function first_focus()
+        {
+            document.getElementById("name1").focus();
+        }
+    </script>
+</head>
+<body onload="first_focus()">
+    <h1>Form Validation</h1>
+    <div id="form_err"></div>
+    <form method="post" onsubmit="return validate_form()">
+        Enter Name: <input type="text" id="name1" oninput="validate_name(this,document.getElementById('err_name'))" ><span id="err_name" style="color:red"></span> <br>
+        Enter Email: <input type="text" id="email1"  oninput="validate_email(this,document.getElementById('err_email'))" > <span id="err_email" style="color:red"></span> <br>
+        Enter Mobile number : <input type="text" id="mobile" oninput="validate_mobile(this,document.getElementById('err_mobile'))"  > <span id="err_mobile" style="color:red"></span> <br>
+        Enter subject1  : <input type="text" id="s1"  > <span id="err_s1" style="color:red"></span> <br>
+        Enter subject2 : <input type="text" id="s2"  > <span id="err_s2" style="color:red"></span> <br>
+        <input type="submit" value="Submit">
+    </form>
+    <div id="result"></div>
+
+</body>
+</html>

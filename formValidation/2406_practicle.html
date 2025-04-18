@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Article Subscription</title>
+    <script src="validate1.js"></script>
+    <script>
+        function setCookie(cname,cvalue,expsecond)
+        {
+            var d = new Date();
+            d.setTime(d.getTime() + (expsecond*1000));
+
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + ";" + expires;
+        }
+
+        function getCookie(cookiename)
+        {
+            var cookie_arr = document.cookie.split(';');
+            for(let i=0; i<cookie_arr.length; i++)
+            {
+                var temp = cookie_arr[i].trim().split('=');
+
+                if(temp[0] == cookiename)
+                {
+                    return temp[1];
+                }
+            }
+            return "";
+        }
+
+        function checkCookie()
+        {
+            var username = getCookie("username");
+
+            if(username != "")
+            {
+                alert("Welcome : " + username);
+            }
+        }
+
+
+        function validateAll()
+        {
+            let g = document.getElementsByName("gender");
+            let gender = "";
+
+            if(g[0].checked == true)
+            {
+                gender = "male";
+            }
+            else if(g[1].checked == true)
+            {
+                gender = "female";
+            }
+
+            let sub = document.getElementById("sub");
+            let Subscription = sub.value;
+            let count = 0,fees;
+
+            let topic = document.getElementsByName("topic");
+            let t = [];
+
+            for(i=0; i<topic.length; i++)
+            {
+                if(topic[i].checked)
+                {
+                    t.push(topic[i].value);
+                    count++;
+                }
+            }
+
+            t = t.join(',');
+            
+            if(Subscription == "student")
+            {
+                fees = 700 + (100 * count);
+            }
+            else if(Subscription == "basic")
+            {
+                fees = 500 + (100 * count);
+            }
+            else if(Subscription == "professional")
+            {
+                fees = 1000 + (100 * count);
+            }
+
+            if(validateName(sname,error_name) && validateGender(g,error_gender) && validateEmail(email,error_email) && validatePhone(phone,error_phone) && validateSub(sub,error_sub) && validateTopic(topic,error_topic))
+            {
+                let t1 = document.getElementById("t1");
+
+                let row = t1.insertRow();
+
+                let c1 = row.insertCell();
+                let c2 = row.insertCell();
+                let c3 = row.insertCell();
+                let c4 = row.insertCell();
+                let c5 = row.insertCell();
+                let c6 = row.insertCell();
+                let c7 = row.insertCell();
+
+                sessionStorage["username"] = sname.value;
+                sessionStorage["email"] = email.value;
+                sessionStorage["gender"] = gender;
+                sessionStorage["phone"] = phone.value;
+                sessionStorage["subscription"] = sub.value;
+                sessionStorage["topic"] = t;
+                sessionStorage["fee"] = fees;
+
+                localStorage["username"] = sname.value;
+                localStorage["email"] = email.value;
+                localStorage["gender"] = gender;
+                localStorage["phone"] = phone.value;
+                localStorage["subscription"] = sub.value;
+                localStorage["topic"] = t;
+                localStorage["fee"] = fees;
+
+                setCookie("username",sname.value,60);
+                setCookie("email",email.value,60);
+                setCookie("gender",gender,60);
+                setCookie("phone",phone.value,60);
+                setCookie("subscription",sub.value,60);
+                setCookie("topic",t,60);
+                setCookie("fee",fees,60);
+
+                c1.innerText = sname.value;
+                c2.innerText = email.value;
+
+                c3.innerText = gender;
+                c4.innerText = phone.value;
+
+                c5.innerText = sub.value;
+                c6.innerText = t;
+
+                c7.innerText = fees;
+
+                if(Number(c7.innerText) > 1100)
+                {
+                    c7.style.backgroundColor = "green";
+                }
+                else
+                {
+                    c7.style.backgroundColor = "red";
+                }
+
+                success.innerText = "Form SuccessFully Submitted";
+
+                setCookie("username",sname.value,60);
+
+                sname.value = "";
+                email.value = "";
+                phone.value = "";
+                sub.value = "";
+
+                if(g[0].checked)
+                {
+                    g[0].checked = false;
+                }
+                else if(g[1].checked)
+                {
+                    g[1].checked = false;
+                }
+
+                for(i=0; i<topic.length; i++)
+                {
+                    if(topic[i].checked)
+                    {
+                        topic[i].checked = false;
+                    }
+                }
+            
+            }
+            else
+            {
+                success.innerText = "";
+            }
+
+        }
+    </script>
+</head>
+<body onload="checkCookie()">
+        <h1 onmouseover="this.style.color='green'" onmouseleave="this.style.color='blue'"> Online Article Subscription </h1>
+
+        <label>Enter the Name : </label>
+        <input type="text" id="sname" oninput="validateName(this,error_name)"/> <span id="error_name" style="color:red;"></span> <br> <br>
+
+        <label>Enter the Email : </label>
+        <input type="text" id="email" oninput="validateEmail(this,error_email)" placeholder="Eg(Parth12@gmail.com)"/> <span id="error_email" style="color:red;"></span>  <br> <br>
+
+        <label>Gender : </label>
+        <input type="radio" name="gender" value="male"/> Male
+        <input type="radio" name="gender" value="female"/> Female
+
+        <span id="error_gender" style="color:red;"></span>  <br> <br>
+
+        <label>Enter the Phone : </label>
+        <input type="text" id="phone" oninput="validatePhone(this,error_phone)" placeholder="Eg(7891234567)"/> <span id="error_phone" style="color:red;"></span>  <br> <br>
+        
+        <label>Subscription Type : </label>
+        <select id="sub">
+            <option value="">Select The Subscription Type</option>
+            <option value="student">Student</option>
+            <option value="professional">Professional</option>
+            <option value="basic">Basic</option>
+        </select>
+
+        <span id="error_sub" style="color:red;"></span>
+
+        <br> <br>
+
+        <label>Topics : </label>
+        <input type="checkbox" value="rdbms" name="topic"> Rdbms
+        <input type="checkbox" value="iot" name="topic"> IOT
+        <input type="checkbox" value="Jscript" name="topic"> Jscript
+        <input type="checkbox" value="network" name="topic"> Network
+
+        <span id="error_topic" style="color:red;"></span> 
+        <br> <br>
+        
+        <input type="button" onclick="validateAll()" onmouseover="this.style.backgroundColor = 'yellow'" onmouseleave="this.style.backgroundColor = 'white'" value="Submit">  <br> <br>
+        
+        <span id="success" style="color:green"></span>
+
+
+        <table id="t1" border="5">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Phone Number</th>
+                <th>Sub_Type</th>
+                <th>Topics</th>
+                <th>Fees</th>
+            </tr>
+        </table>
+
+</body>
+</html>

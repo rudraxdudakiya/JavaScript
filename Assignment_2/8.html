@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <label for="name">User Id:</label>
+        <input type="text" id="name" name="name" oninput="fillpass()"><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        <label for="id">Remember ID:</label>
+        <input type="checkbox" id="id" name="id"><br><br>
+        <input type="submit" value="Submit" oninput="f1()"><br><br>
+    </form>
+    <script>
+
+        function f1() {
+            const name = document.getElementById("name").value;
+            const password = document.getElementById("password").value;
+            if (name === "" || password === "") {
+                alert("Please fill in all fields.");
+                return false;
+            }
+            let user = getCookie(name);
+            if (user == user) {
+                alert("Welcome back, " + user + "!");
+            } else {
+                alert("Welcome, " + name + "!");
+                setCookie(name, name, 30); // Set cookie for 30 days
+            }
+            return true;
+        }
+
+        // Function to set a cookie
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            const expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        // Function to get a cookie by name
+        function getCookie(cname) {
+            const name = cname + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i].trim().split("=");
+                if (c[0] === cname) {
+                    return c[1];
+                }
+            }
+            return "";
+        }
+</body>
+</html>

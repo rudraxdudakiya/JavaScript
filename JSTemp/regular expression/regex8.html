@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p>Click the button to do a global search for "Ms" at the beginning or end of a word in a string.</p>
+    
+    <button onclick="myFunction()">Click</button>
+    
+    <p id="demo"></p>
+    
+    <script>
+    function myFunction() {
+      var str = "Visit Mscit Mscict"; 
+      //var patt1 = /\bMs/g;  //Ms,Ms 
+      var patt1 = /it\b/g; //g  //it,it
+      var result = str.match(patt1);
+      console.log(result)
+      document.getElementById("demo").innerHTML = result;
+    }
+    </script>
+    
+    </body>
+    </html>

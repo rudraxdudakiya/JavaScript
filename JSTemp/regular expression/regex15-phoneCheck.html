@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<h2>JavaScript String Methods and RegExp</h2>
+
+<form>
+  <label>Enter phone number e.g. (123) 456-7890 
+    <input type="text" name="phone"></label>
+  <input type="submit">
+</form>
+
+<p id="result"></p>
+
+<script>
+var result = document.querySelector('#result');
+var form = document.querySelector('form');
+//var p=/^[6-9]{3}\d{7}$/;
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  checkPhoneNumber(this.phone.value);
+});
+
+function checkPhoneNumber(phoneNo) {
+  // to escape ( , \( is used /
+  var phoneRE = /^\(\d\d\d\) \d\d\d-\d\d\d\d$/;
+  //var mobile=/^[789]{3}\d{7}$/
+  //var mobileRE=/^[89]{1}\d{9}$/;
+  //var phoneRE =/^[789]{2}\d{8}$/
+   
+   // /^[^0-5]{1}[0-9]{9}$/
+   // /^\d{10}$/
+   // /^[^0-5]{1}\d{9}$/
+  //if (phoneNo.match(phoneRE)) 
+  if (phoneRE.test(phoneNo)) 
+  {
+    result.innerHTML = 'The phone number is <strong>valid!</strong>';
+  } else {
+    result.innerHTML = 'The phone number is <strong>invalid!</strong>';
+  }
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validate</title>
+
+    <script>
+        function validate()
+        {
+            event.preventDefault();
+            document.write(validName(document.getElementById('name'),document.getElementById('err_name')));
+             if(validName(name,document.getElementById('err_name')) == true) 
+            createTable();
+        }
+    </script>
+    <style>
+        span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <script src="valid.js"></script>
+
+    <h1>Form Validation</h1>
+    <form id="f1" onsubmit="validate(event)">
+        <label>Enter name : 
+            <input type="text" id="name" oninput="validName(this,document.getElementById('err_name'))"> </label>
+            <span id="err_name"></span> <br><br>
+        <label>Enter Div : 
+            <input type="text" id="divison" oninput="validDiv(this,document.getElementById('err_div'))"> </label> 
+            <span id="err_div"></span><br><br>
+        <label>Enter age : 
+            <input type="text" id="age" oninput="validAge(this,document.getElementById('err_age'))"></label>
+            <span id="err_age"></span> <br><br>
+        <label>Enter mobile no : 
+            <input type="text" id="mono" oninput="validMono(this,document.getElementById('err_mono'))"></label>
+            <span id="err_mono"></span> <br><br>
+            <label>Email :
+                <input type="text" id="email" oninput="validEmail(this,getElementById('err_email'))">
+            </label>
+            <span id="err_email"></span><br><br>
+        Gender : 
+            <input type="radio" id="male" name="gender" oninput="validGender(document.getElementById('err_gender'))">Male
+            <input type="radio" id="female" name="gender" oninput="validGender(document.getElementById(err_gender))">Female
+            <span id="err_gender"></span><br><br>
+        <label>Password : 
+            <input text="password" id="pass" oninput="validPass(this,document.getElementById('err_pass'))"></label>
+            <span id="err_pass"></span><br><br>
+        State : <select name="state" id="state" onclick="validState()" onchange="fillCity()">
+            <option value="0">-Select State-</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Maharashtra">Maharashtra</option>
+        </select><span id="state_err"></span><br><br>
+        Select City :
+        <select name="city" id="city" onclick="validCity()"></select><span id="city_err"></span><br><br>
+        <br><br><input type="button" value="Submit" onclick="createTable()">
+        
+    </form>
+
+    <br><br>
+    <div id=tableShow></div>
+</body>
+</html>

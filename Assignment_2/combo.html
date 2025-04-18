@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combo</title>
+
+    <script>
+            // var countries = new Array("India", "USA", "UK");
+            var states = new Array();
+            states[0]="";
+            states[1]="Gujarat|Panjab|Goa";
+            states[2]="CA|LS";
+            states[3]="London";
+
+            function fillstate()
+            {
+                var state = states[country.selectedIndex];
+                var stateSelect = document.getElementById("state");
+                stateSelect.length=0;
+                stateSelect.options[0]=new Option("-Select State-","-1");
+                var stateArray = state.split("|");
+                for(var i=0; i<stateArray.length; i++)
+                    stateSelect.options[stateSelect.length] = new Option(stateArray[i], stateArray[i]);
+            }
+
+        // function populateCountry(countryId, stateId) {
+        //     var countrySelect = document.getElementById(countryId);
+        //     // var stateSelect = document.getElementById(stateId);
+        //     countrySelect.length=0;
+        //     countrySelect.options[0]=new Option("-Select Country-","-1");
+        //     for(var i=0; i<countries.length; i++)
+        //         countrySelect.options[countrySelect.length] = new Option(countries[i], countries[i]);
+
+        //     if(stateSelect)
+        //     {
+        //         countrySelect.onchange() =function(){
+        //             populateState(countryId,stateId)
+        //         };
+                
+        //     }
+        // }
+    </script>
+</head>
+<body>
+    <label>
+    Country : <select id="country" name="country" onchange="fillstate()">
+        <option value="-1">-select country-</option>
+        <option value="india">india</option>
+        <option value="usa">usa</option>
+        <option value="uk">uk</option>
+    </select></hr>
+    State : <select id="state" name="state"></select>
+    </label>
+
+    <script>
+        populateCountry("country", "state");
+    </script>
+    
+</body>
+</html>

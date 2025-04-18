@@ -1,0 +1,21 @@
+
+<h2>JavaScript String Methods and RegExp</h2>
+
+<p id="demo"></p>
+String object mathods search(), replace() and match()
+<script>
+var str = "Hello Sem4!"; 
+var n = str.search("sem4");
+document.getElementById("demo").innerHTML = n;
+</script>
+Use a regular expression to do a case-insensitive search in a string:<br><br>
+<p id="demo1"></p>
+
+<script>
+var str1 = "Hello Sem4 Sem4!"; 
+var n1 = str1.search(/sem4/ig); console.log(n1)
+document.getElementById("demo1").innerHTML = n1;
+</script>
+
+</body>
+</html>

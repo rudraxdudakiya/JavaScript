@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Student</title>
+    
+    <script src="stud.js"></script>
+
+    <style>
+        span {
+            font-weight: 30px;
+            font-style: italic;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Student Registration</h1>
+
+    <form id="form">
+
+        <label for="stud">
+            Spid : <input type="text" id="spid" oninput="validId(this,errspid)"><span id="errspid"></span><br><br>
+            Rollno : <input type="text" id="rno" oninput="validRno(this,errrno)"><span id="errrno"></span><br><br>
+            Name : <input type="text" id="name1" oninput="validName(this,errname)"><span id="errname"></span><br><br>
+            Samester : <input type="text" id="sem" oninput="validSem(this,errsem)"><span id="errsem"></span><br><br>
+            Division : <input type="text" id="div" oninput="validDiv(this,errdiv)"><span id="errdiv"></span><br><br>
+            Age : <input type="text" id="age" oninput="validAge(this,errage)"><span id="errage"></span><br><br>
+            Gender : <input type="radio" name="gender" value="male">Male<input type="radio" name="gender" value="female">Female <span id="errgen"></span><br><br>
+            Email : <input type="text" id="email" oninput="validEmail(this,erremail)"><span id="erremail"></span><br><br>
+            Phone : <input type="text" id="phone" oninput="validPhone(this,errphone)"><span id="errphone"></span><br><br>
+            Linkedin : <input type="text" id="link" oninput="validLink(this,errlink)"><span id="errlink"></span><br><br>
+            Username : <input type="text" id="uname" oninput="validUname(this,erruname)"><span id="erruname"></span><br><br>
+            Password : <input type="password" id="pass" oninput="validPass(this,errpass)"><span id="errpass"></span><br><br>
+            Confirm Password : <input type="password" id="cpass" oninput="validCpass(this,errcpass)"><span id="errcpass"></span><br><br>
+            Programming Language : <input type="checkbox" name="plang" value="c#">C#
+            <input type="checkbox" name="plang" value="php">php
+            <input type="checkbox" name="plang" value="js">js
+            <input type="checkbox" name="plang" value="c++">c++<span id="errplang"></span><br><br>
+            State : <select id="state" onchange="getCity()">
+                <option value="-1">-- Select State --</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Rajasthan">Rajasthan</option>
+            </select><span id="errstate"></span><br><br>
+            City : <select name="city" id="city"></select><span id="errcity"></span><br><br>
+            <hr>
+            <input type="button" value="Submit" onclick="showData()" style="width: 70px; height: 40px;"><br>
+        </label>
+        <span id="err" style="color:red"></span><br><br>
+        <div id="data"></div>
+
+    </form>
+
+</body>
+</html>

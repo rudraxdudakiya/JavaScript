@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<h2>JavaScript Regular Expressions</h2>
+Using exec()<br>
+The exec() method is a RegExp expression method.
+<br><br>
+It searches a string for a specified pattern, and returns the first found text as an object.
+
+<br><br>
+If no match is found, it returns an empty (null) object.
+<br><br>
+
+<p id="demo"></p>
+
+<script>
+var p=/e/g; 
+var obj = p.exec("Hello students! Js demo !"); console.log(obj)
+obj = p.exec("Hello students! Js demo !");console.log(obj)
+
+document.getElementById("demo").innerHTML =
+"Found " + obj.length+"   "+obj[0] + " in position " + obj.length + " in the text: " + obj.input;
+document.write(obj)
+console.log(obj)
+</script>
+
+</body>
+</html>

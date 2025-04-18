@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel</title>
+    <style>
+        span {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="name" placeholder="Enter Hotel Name" oninput="validname()">
+    <span id="errname"></span><br><br>
+    hotel Amenites:<br>
+    <label>
+    <input type="checkbox" name="check" id="conroom">Conference Room<br>
+    <input type="checkbox" name="check" id="pool">Swimming Pool<br>
+    <input type="checkbox" name="check" id="gym">Gym<br>
+    <input type="checkbox" name="check" id="wifi">Wifi<br>
+    <input type="checkbox" name="check" id="Restaurent">24 hours Restaurent<br>
+    <input type="checkbox" name="check" id="laundry">Laundry<br>
+    <input type="checkbox" name="check" id="parking">Parking<br>
+    <input type="button" value="Submit" onclick="submit()"><br><br>
+    </label>
+    <div id="result"></div>
+    <script>
+        function validname() {
+            var name = document.getElementById("name").value.trim();
+            var err = document.getElementById("errname");
+
+            if (/[^a-zA-Z ]/.test(name) || name === "" || name.length < 3) {
+                err.innerHTML = "Enter valid name";
+                return false;
+            } else {
+                err.innerHTML = "";
+                return true;
+            }
+        }
+        function submit()
+        {
+            if(validname())
+            {
+                var name = document.getElementById("name").value.trim();
+                var res = document.getElementById("result");
+                res.innerHTML = "Hotel Name: " + name + "<br>";
+                var amenities = [];
+
+                if (document.getElementById("conroom").checked) {
+                    amenities.push("Conference Room");
+                }
+                if (document.getElementById("pool").checked) {
+                    amenities.push("Swimming Pool");
+                }
+                if (document.getElementById("gym").checked) {
+                    amenities.push("Gym");
+                }
+                if (document.getElementById("wifi").checked) {
+                    amenities.push("Wifi");
+                }
+                if (document.getElementById("Restaurent").checked) {
+                    amenities.push("24 hours Restaurent");
+                }
+                if (document.getElementById("laundry").checked) {
+                    amenities.push("Laundry");
+                }
+                if (document.getElementById("parking").checked) {
+                    amenities.push("Parking");
+                }
+                var star = amenities.length;
+                if (star >= 5) {
+                    alert("5 Star Hotel");
+                    
+                }else if(star >= 4) {
+                    alert("4 Star Hotel");
+                    res.innerHTML += "4 Star Hotel<br>";
+                } else if (star >= 3) { 
+                    alert("3 Star Hotel");
+                    res.innerHTML += "3 Star Hotel<br>";
+                } else if(star >= 2) {
+                    alert("2 Star Hotel");
+                    res.innerHTML += "2 Star Hotel<br>";
+                }
+                alert("Hotel Name: " + name + "\nAmenities: " + amenities.join(", "));
+                res.innerHTML += "Amenities: " + amenities.join(", ") + "<br>";
+                res.innerHTML += "Total Amenities: " + star + "<br>";
+                
+            }
+            else
+            {
+                alert("Please enter valid details.");
+            }
+        }
+    </script>
+</body>
+</html>

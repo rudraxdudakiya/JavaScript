@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload=function()
+        {
+            if (localStorage["name"]==undefined)
+            {
+                localStorage["name"]="localStorageName"
+                localStorage["count"]=1
+            }
+            if (sessionStorage["name"]==undefined)
+            {
+                sessionStorage["name"]="sessionStorageName"
+                sessionStorage["count"]=1
+            }
+            if(sessionStorage["count"]!=0)
+            {
+                sessionStorage["count"]++
+            }
+            d1.innerHTML="Names  "+localStorage["name"]+", "+sessionStorage["name"]
+            d1.innerHTML+="<br>Count  "+localStorage["count"]+" "+sessionStorage["count"]
+        }
+    </script>
+</head>
+<body>
+    <h1>localStorage, sessionStorage GET</h1>
+    <div id="d1"></div>
+
+</body>

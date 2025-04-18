@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        localStorage["name"]="LS"
+        sessionStorage["name"]="SS"
+        localStorage.setItem("k","v")
+        if(!sessionStorage["count"])
+            sessionStorage["count"]=1
+        else
+            sessionStorage["count"]++
+
+        if(!localStorage["count"])
+            localStorage["count"]=1
+        else
+            localStorage["count"]++
+    </script>
+</head>
+<body>
+    <h1>localStorage, sessionStorage SET</h1>
+</body>
+</html> 

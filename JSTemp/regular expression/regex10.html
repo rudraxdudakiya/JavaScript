@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<h1>Quantifiers define quantities:</h1>
+
+Quantifier	Description	<br>
+n+	Matches any string that contains at least one n<br>
+n*	Matches any string that contains zero or more occurrences of n   <br>
+n?	Matches any string that contains zero or one occurrences of n<br>
+
+<p>Click the button to do a global search .</p>
+
+<button onclick="myFunction()">Click</button>
+
+<p id="demo"></p>
+ 
+<script>
+function myFunction() {
+  var str = "Helo Hell Hello Hellooo Heloo World! Heo Hello wooorld!"; 
+  var patt1 = /Hell*o+/g;   
+  var result = str.match(patt1);
+  document.getElementById("demo").innerHTML = result;
+}
+</script>
+
+</body>
+</html>

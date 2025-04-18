@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    <title>Alarm Clock</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #time {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+        }
+        #alarmStatus {
+            margin-top: 10px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="time">--:--:--</div>
+
+    <label for="alarmTime">Set Alarm Time (HH:MM):</label>
+    <input type="time" id="alarmTime">
+    <button onclick="setAlarm()">Set Alarm</button>
+    <div id="alarmStatus"></div>
+
+    <script>
+        let alarmTime = null;
+
+        // Show current time
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById("time").innerText = timeString;
+
+            const current = now.getHours().toString().padStart(2, "0") + ":" +
+                            now.getMinutes().toString().padStart(2, "0");
+
+            if (alarmTime === current) {
+                alert("⏰ Alarm Ringing!");
+                alarmTime = null;
+                localStorage.removeItem("alarmTime");
+                document.getElementById("alarmStatus").innerText = "Alarm completed!";
+            }
+        }
+
+        // Set the alarm and save to localStorage
+        function setAlarm() {
+            const timeInput = document.getElementById("alarmTime").value;
+            if (!timeInput) {
+                alert("Please select a valid time.");
+                return;
+            }
+            alarmTime = timeInput;
+            localStorage.setItem("alarmTime", alarmTime);
+            document.getElementById("alarmStatus").innerText = `Alarm set for ${alarmTime}`;
+        }
+
+        // Load alarm from localStorage if set
+        window.onload = () => {
+            const storedAlarm = localStorage.getItem("alarmTime");
+            if (storedAlarm) {
+                alarmTime = storedAlarm;
+                document.getElementById("alarmStatus").innerText = `Alarm set for ${alarmTime}`;
+            }
+            setInterval(updateClock, 1000); // Update time every second
+        };
+    </script>
+
+</body>
+</html>

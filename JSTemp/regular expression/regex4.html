@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<h1>Find any of the digits between the brackets	</h1>
+
+<button onclick="myFunction()">Click</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var str = "12345674289";
+  var patt1 = /[1-4]/g;
+  var result = str.match(patt1);
+  document.getElementById("demo").innerHTML = result; 
+}
+</script>
+
+</body>
+</html>

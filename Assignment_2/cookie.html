@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.cookie="c1=v1"
+        document.cookie="c2=v2"
+        document.cookie="c3=v3"
+        function getCookie(cname)
+        {
+            let c=document.cookie.split("; ")
+            for(let i=0;i<c.length;i++){
+                var c1=c[i].split("=")
+                if(c1[0]==cname) return c1[1]
+            }
+            return ""
+        }
+        var cval=getCookie("c2")
+        alert(cval)
+</script>
+</head>
+<body>
+    Cookie
+</body>
+</html>

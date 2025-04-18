@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> valid</title>
+
+</head>
+
+<body>
+
+    <script>
+
+        let isCreated = false;
+
+        function tablecreate(){
+            data.innerHTML = `
+             <table border="1" id="tbl"><th>name</th><th>email</th><th>phone</th><th>gender</th><th>Language</th><th>type</th><th>Amount</th></table>
+
+            `; 
+        }
+        function validname() {
+            let name = document.getElementById("name").value;
+            if (name == "" || !/^[a-zA-Z ]+$/.test(name)) {
+                errname.innerHTML = `<span style="color:red">Please enter valid name</span>`;
+                return false;
+            }
+            else {
+                errname.innerHTML = `<span style="color:green">Valid</span>`;
+            }
+            return true;
+        }
+        function validemail() {
+            let email = document.getElementById("email").value;
+            if (email == "" || !/^[a-z0-9_]+@[a-z0-9]{3,}\.[a-z]{2,}$/.test(email)) {
+                erremail.innerHTML = `<span style="color:red">Please enter valid email</span>`;
+                return false;
+            }
+            else {
+                erremail.innerHTML = `<span style="color:green">Valid</span>`;
+            }
+            return true;
+        }
+        function validphone() {
+            let phone = document.getElementById("phone").value;
+            if (phone == "" || !/^(7|8|9)[0-9]{9}$/.test(phone)) {
+                errno.innerHTML = `<span style="color:red">Please enter valid phone number</span>`;
+                return false;
+            }
+            else {
+                errno.innerHTML = `<span style="color:green">Valid</span>`;
+            }
+            return true;
+        }
+        function validtype() {
+            let type = document.getElementById("type").value;
+            if (type == "-1") {
+                errtype.innerHTML = `<span style="color:red">Please select a type</span>`;
+                return false;
+            }
+            else {
+                errtype.innerHTML = `<span style="color:green">Valid</span>`;
+            }
+            return true;
+        }
+        function validplang() {
+            let plang = document.getElementsByName("plang");
+            let lang = [];
+            for (let i = 0; i < plang.length; i++) {
+                if (plang[i].checked) {
+                    lang.push(plang[i].value);
+                }
+            }
+            if (lang.length == 0) {
+                errplang.innerHTML = `<span style="color:red">Please select at least one programming language</span>`;
+                return false;
+            }
+            else {
+                errplang.innerHTML = `<span style="color:green">Valid</span>`;
+            }
+            return true;
+        }
+        
+        function validgender()
+        {
+            let gen = document.getElementsByName("gender");
+            gender = (gen[0].checked) ? "Male" : (gen[1].checked) ? "Female" : "";
+            if (gender == "") {
+                errgen.innerHTML = `<span style="color:red">Please select a gender</span>`;
+                return false;
+            }
+            else {
+                errgen.innerHTML = `<span style="color:green">Valid</span>`;
+            }
+            return true;
+
+        } 
+
+        function formValid(){
+            return validname() && validemail() && validphone() && validtype() && validplang() && validgender();
+        }
+        let values= []
+        function showData()
+        {
+            if(!formValid()){
+                data.innerHTML = `<span style="color:red">Please fill all the fields</span>`;
+                return false;
+            }
+            if (!isCreated) {
+                tablecreate();
+                isCreated = true;
+            }
+            
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let phone = document.getElementById("phone").value;
+            let type = document.getElementById("type").value;
+            let plang = document.getElementsByName("plang");
+            let gen = document.getElementsByName("gender");
+
+            let amt;
+
+            let gender = "";
+            let lang = [];
+            for (let i = 0; i < plang.length; i++) {
+                if (plang[i].checked) {
+                    lang.push(plang[i].value);
+                }
+            }
+            amt=parseInt(type)+(100*lang.length);
+            gender = (gen[0].checked) ? "Male" : (gen[1].checked) ? "Female" : "";
+            
+            
+            let row = `
+                <td>${name}</td>
+                <td>${email}</td>
+                <td>${phone}</td>
+                <td>${gender}</td>
+                <td>${lang}</td>
+                <td>${type}</td>
+                <td>${amt}</td>
+            `;
+
+            document.getElementById("tbl").innerHTML += row
+        }
+    </script>
+
+    <input type="text" id="name" oninput="validname()" placeholder="Enter your name"><br><span id="errname"></span><br>
+    <input type="text" id="email" oninput="validemail()" placeholder="Enter your email"><br><span id="erremail"></span><br>
+    <input type="text" id="phone" oninput="validphone()" placeholder="Enter your phone number"><br><span id="errno"></span><br>
+    <input type="radio" name="gender">Male
+    <input type="radio" name="gender">Female<br> <span id="errgen"></span><br>
+    <input type="checkbox" name="plang" value="c#">C#
+    <input type="checkbox" name="plang" value="php">PHP
+    <input type="checkbox" name="plang" value="java">Java
+    <input type="checkbox" name="plang" value="py">Python
+    <input type="checkbox" name="plang" value="html">HTML
+    <input type="checkbox" name="plang" value="js">JS
+    <input type="checkbox" name="plang" value="cpp">C++<br><span id="errplang"></span><br>
+    <select name="ctype" id="type" onchange="validtype()">
+        <option value="-1">-- Select Type --</option>
+        <option value="1000">Professional</option>
+        <option value="1500">Non-Professional</option>
+        <option value="700">Student</option>
+        <option value="400">Basic</option>
+    </select><br><span id="errtype"></span><br>
+
+    <input type="button" value="Submit" onclick="showData()"><br><br>
+
+    <div id="data"></div>
+</body>
+</html>

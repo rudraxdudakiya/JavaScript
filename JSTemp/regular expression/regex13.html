@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+Using the RegExp Object<br>
+In JavaScript, the RegExp object is a regular expression object with predefined properties and methods.<br><br>
+
+Using test()<br>
+The test() method is a RegExp expression method.<br>
+
+It searches a string for a pattern, and returns true or false, depending on the result.<br><br>
+
+<p>Search for an "e" in the paragraph:</p>
+
+<p id="p01">Demo easy !</p>
+
+<p id="demo"></p>
+
+<script>
+    var text = document.getElementById("p01").innerHTML; 
+document.getElementById("demo").innerHTML = /e/.test(text);
+</script>
+
+</body>
+</html>

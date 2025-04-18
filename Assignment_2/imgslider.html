@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        cnt=0;
+        const PATH = "/images";
+        const IMGS = [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+            "5.jpg",
+        ];
+        function next() {
+            cnt++;
+            if (cnt == IMGS.length) {
+                cnt = 0;
+            }
+            let img = document.getElementById("img");
+            img.src = PATH + '/' + IMGS[cnt];
+        }
+        function prev() {
+            let img = document.getElementById("img");
+            
+            if (cnt == 0) {
+                cnt =IMGS.length-1;
+            }
+            else {
+                cnt--;
+            }
+            img.src = PATH + '/' + IMGS[cnt];
+        }
+        setInterval(next, 2000);
+    </script>
+</head>
+<body onload="img.src = PATH + '/' + IMGS[0]">
+    <h1>Image Slider</h1>
+    <img src="" alt="" id="img" width="400" height="300">
+    <button onclick="next()">Next</button>&nbsp;&nbsp;<button onclick="prev()">previous</button>
+</body>
+</html>

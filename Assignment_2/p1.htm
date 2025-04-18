@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Amount</title>
+
+    <style>
+        span {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function validid()
+        {
+            var id = document.getElementById("id").value.trim();
+            var err = document.getElementById("errid");
+
+            if(/[^0-9]/.test(id) || id ==="") {
+                err.innerHTML="Enter numbers only";
+                return false;
+            }
+            else {
+                err.innerHTML="";
+                return true;
+            }
+        }
+        function validdate()
+        {
+            var date = document.getElementById("date").value.trim();
+            var err = document.getElementById("errdate");
+            
+            if(!/^\d{4}-\d{1,2}-\d{1,2}$/.test(date) || !date==="") {
+                err.innerHTML="Invalid date formate";
+                return false;
+            }
+            else {
+                err.innerHTML="";
+                return true;
+            }
+        }
+
+        function validamt()
+        {
+            var amount = document.getElementById("amount").value.trim();
+            var err = document.getElementById("erramount");
+
+            if(/[^0-9.]/.test(amount) || amount ==="") {
+                err.innerHTML="Enter numbers only";
+                return false;
+            }
+            else {
+                err.innerHTML="";
+                return true;
+            }
+        }
+
+        function getBill()
+        {
+            if(!validid() || !validdate() || !validamt()) {
+                document.getElementById("result").innerHTML = "Please enter valid data";
+                return;
+            }
+            document.getElementById("result").innerHTML = "in fun"; 
+            var amt=document.getElementById("amount").value.trim();
+            var date=document.getElementById("date").value.trim();
+            var day = new Date(date).getDay();
+            console.log(day);
+            console.log(amt);
+
+            var discount = 0, tax = 0, netPayment = 0;
+            if(day == 1 || day == 2) discount = 0.1 * amt; // Monday or Tuesday
+            else if(day == 3 || day == 4) discount = 0.15 * amt; // Wednesday or Thursday
+            else discount = 0.05 * amt; // Friday, Saturday, Sunday
+
+            tax = 0.05 * amt;
+            netPayment = amt - discount + tax;
+            document.getElementById("result").innerHTML = `Discount:${discount}<br>Tax:${tax}<br>Net Payment:${netPayment}`;
+        }
+    </script>
+
+    <h1>Calculation of Bill</h1>
+
+    <input type="text" placeholder="ID" id="id" oninput="validid()">
+    <span id="errid"></span><br><br>
+
+    <input type="text" placeholder="Date (yyyy-mm-dd)" id="date" oninput="validdate()">
+    <span id="errdate"></span><br><br>
+
+    <input type="text" placeholder="Bill Amount" id="amount" oninput="validamt()">
+    <span id="erramount"></span><br><br>
+
+    <button onclick="getBill()">Calculate</button>
+    <br><br>
+
+    <div id="result"></div>
+</body>
+</html>

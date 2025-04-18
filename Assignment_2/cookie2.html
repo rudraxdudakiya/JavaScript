@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html><html>
+<head>
+<script> 
+
+function setCookie(cname,cvalue,exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires=" + d.toGMTString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + "; SameSite=Secure; path=/";
+}
+//"cookiename=cookievalue; expires= Thu, 21 Aug 2014 20:00:00 UTC;cookiename1=cookievalue; expires= Thu, 21 Aug 2014 20:00:00 UTC"
+function getCookie(cookiename) {
+ 
+    var cookies_arr = document.cookie.split(';');
+    for(var i=0;i < cookies_arr.length;i++) {
+        var tempcookie = cookies_arr[i].trim().split("=")
+        if (tempcookie[0]==cookiename)
+            return tempcookie[1];       
+    }
+    return "";
+}
+
+function checkCookie() {
+  var user=getCookie("username");
+  if (user != "") {
+    alert("Welcome again " + user);
+  } else {
+     user = prompt("Please enter your name:","");
+     if (user != "" && user != null) {
+       setCookie("username", user, 30);
+     }
+  }
+}
+// /"cookie1=C1;cookie2=C2"
+document.cookie = "cookie1=C1"; 
+document.cookie = "cookie2=C2"; 
+alert(document.cookie);
+console.log(document.cookie); 
+function getcookie(cname)
+{  //C1=V1; C2=V2
+  var cookiearr=document.cookie.split(";")
+  for(var i=0;i<cookiearr.length;i++)
+  {
+    var tempcookie=cookiearr[i].split("=")
+    if(tempcookie[0].trim()==cname)
+      return tempcookie[1]
+  }
+  return "";
+}
+</script>
+</head>
+<body onload="checkCookie()">
+  You can create cookies using document. cookie property like this.
+  <br><br>
+  document.cookie = "cookiename=cookievalue"
+  <br><br>
+  document.cookie = "cookiename=cookievalue; expires= Thu, 21 Aug 2014 20:00:00 UTC"
+  <br><br>
+  You can access the cookie like this which will return all the cookies saved for the current domain.
+  <br><br>
+  
+  var x =  document.cookie
+  <br><br>
+  <br><br>
+
+  To delete a cookie, you just need to set the value of the cookie to empty and set the value of expires to a passed date.
+  <br>
+  document.cookie = "cookiename= ; expires = Thu, 01 Jan 1970 00:00:00 GMT" 
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Brackets are used to find a range of characters:</h1>
+<h1>Find any of the characters between the brackets [abc]	</h1>
+<button onclick="myFunction()">Click!!</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+
+const paragraph = "Let's learn JavaScript. Javascript is fun!!";
+const regex = /javascript/ig;
+document.getElementById("demo").innerHTML = 
+                  paragraph.match(regex);
+console.log(paragraph.match(regex))
+  var str = "Visit MScIT..";
+  //var patt1 = /is/ig;  
+  var patt1 = /[A-Z]/g; 
+  var result = str.match(patt1); //V,M,S,I,T  array
+  document.getElementById("demo").innerHTML += "<br>"+result;
+  console.log(result)
+}
+</script>
+
+</body>
+</html>

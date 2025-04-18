@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // document.write(/abc/.test("abcde")+"<br>");
+    // // checks if string abc is available → true
+    // document.write(/abc/.test("abfde")+"<br>");
+    // // → false
+    
+    // //match string that contain digit
+    // document.write(/[0123456789]/.test("in 1992")+"<br>");
+    // // → true
+    // document.write(/[0-9]/.test("in 1992")+"<br>");
+    // // → true
+    
+    // //"input str '123'"
+    // document.write(/'\d+'/.test("'123'")+"<br>");
+    // //  /'\d+'/.test("test '123' test") -> true
+    // //  /^'\d+'$/.test("test '123' test") ->false
+    // // → true
+    // document.write(/'\d+'/.test("''")+"<br>");
+    // // → false
+    // document.write(/'\d*'/.test("'123'")+"<br>");
+    // // → true
+    // document.write(/'\d*'/.test("''")+"<br>");
+    // // → true
+    
+    // //match non-binary
+    // let notBinary = /[^01]/;
+    // document.write(notBinary.test("1100110100110")+"<br>");
+    // // → false
+    // document.write(notBinary.test("1100110200110")+"<br>");
+    // // → true
+    
+    // let color = /colou?r/; // ? = 0 or 1
+    // document.write(color.test("color")+"<br>");
+    // // → true
+    // document.write(color.test("colour")+"<br>");
+    // // → true
+    
+    
+    let dateTime =/\d\d-\d\d-\d\d\d\d \d\d:\d\d/;
+    // document.write(dateTime.test("01-01-2003 15:20")+"<br>");
+    // → true    // 
+    // document.write(dateTime.test("30-jan-2003 15:20")+"<br>");
+    // → false
+    let dateTime1 = /\d{1,2}-[0-12]{1,2}-\d{4} \d{1,2}:\d{2}/;
+    document.write(dateTime1.test("30-12-2003 8:45")+"<br>");
+    // → true
+    let dateTime2 = /\d{1,2}-[A-Za-z]{3}-\d{4} \d{1,2}:\d{2}/;
+    document.write(dateTime2.test("1-feb-2003 8:45")+"<br>");
+    
+    
+    let match = /\d+/.exec("one two 100");
+    // console.log(match)
+    document.write(match+"<br>");
+    // // → ["100"]
+    // document.write(match.index+"<br>");
+    // // → 8
+    
+    </script>
+    <br><br> <br><br> 
+    The test method is the absolute simplest way to match a regular expression. It tells you only whether it matched and nothing else. 
+    <br><br> Regular expressions also have an exec (execute) method that will return null if no match was found and return an object with information about the match otherwise.
+    <br><br>
+    email, a@b.com<br>
+    password  at least one ucase, spl char, digit,length 6 or more
+    <br><br>
+    url http://www.google.com/dir1/page1.html
+    <br><br>
+    ip address 111.111.111.111
+    <br><br>
+    Agrawal<br>
+    Agarawal v<br>
+    Aggarwal<br>
+    Aagarwal<br>
+    
+    extract html
+    </body></html>

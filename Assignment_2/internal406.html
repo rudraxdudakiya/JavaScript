@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        span {
+            color: red;
+            font-weight: bold;
+        }
+        #result {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function validname() {
+            var name = document.getElementById("name").value.trim();
+            var err = document.getElementById("errname");
+
+            if (/[^a-zA-Z]/.test(name) || name === "") {
+                err.innerHTML = "Enter characters only";
+                return false;
+            } else if (name.length < 3) {
+                err.innerHTML = "Name should be at least 3 characters long";
+                return false;
+            } else {
+                err.innerHTML = "";
+                return true;
+            }
+        }
+        function validmono() {
+            var mono = document.getElementById("Mobile").value.trim();
+            var err = document.getElementById("errid");
+
+            if (/[^0-9]/.test(mono) || mono === "") {
+                err.innerHTML = "Enter numbers only";
+                return false;
+            } else if (mono.length != 10) {
+                err.innerHTML = "Mobile number should be 10 digits long";
+                return false;
+            } else {
+                err.innerHTML = "";
+                return true;
+            }
+        }
+        function validemail() {
+            var email = document.getElementById("email").value.trim();
+            var err = document.getElementById("erremail");
+
+            if (!/^[a-z0-9_]+@[a-z.-]+\.[a-z]{2,}$/.test(email) || email === "") {
+                err.innerHTML = "Invalid email format";
+                return false;
+            } else {
+                err.innerHTML = "";
+                return true;
+            }
+        }
+        function validSelect() {
+            var courseSelect = document.getElementById("courseSelect").value;
+            var err = document.getElementById("errcourse");
+            if (courseSelect == "-1") {
+                err.innerHTML = "Please select a course";
+                return false;
+            } else {
+                err.innerHTML = "";
+                return true;
+            }
+        }
+
+        var course;
+        function countCourse() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            var count = 0;
+            var courses = [];
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    courses.push(checkboxes[i].value);
+                    count++;
+                }
+            }
+            if (count == 0) {
+                document.getElementById("course").innerHTML = "Please select atleaset one course";
+                return false;
+            }
+            else {
+                course = courses.join(", ");
+                document.getElementById("course").innerHTML = "You have selected " + count + " course(s) are : " + course;
+            }
+            return count;
+        }
+        function validGender()
+        {
+            var male=document.getElementById("male");
+            var female=document.getElementById("female");
+            if(!(male.checked || female.checked)){
+                document.getElementById("errgen").innerHTML="Select gender";
+                return false;
+            }
+            else{
+                document.getElementById("errgen").innerHTML="";
+                return true;
+            }
+        }
+
+        var tableCreates = false;
+        function data() {
+                        var data = document.getElementById("data");
+
+                        var rno = document.getElementById("rno").value.trim();
+                        var name = document.getElementById("name").value.trim();
+                        var mono = document.getElementById("Mobile").value.trim();
+                        var email = document.getElementById("email").value.trim();
+                        var courseSelect = document.getElementById("courseSelect");
+                        var courseSelect = courseSelect.options[courseSelect.selectedIndex].text;
+                        var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+                        var totalAmount = amtCalculate();
+
+                        var table = document.getElementById("table");
+
+                        if(!tableCreates) {
+                            table.border = "1";
+                            var header =`<th>Rollno</th>
+                                        <th>Name</th>
+                                        <th>Mobile No</th>
+                                        <th>Email</th>
+                                        <th>Course Type</th>
+                                        <th>Courses</th>
+                                        <th>Total Amount</th>`;
+                            table.innerHTML = header;                    
+                            tableCreates = true;
+                        }
+                        
+                        var row = `<tr>
+                                    <td>${rno}</td>
+                                    <td>${name}</td>
+                                    <td>${mono}</td>
+                                    <td>${email}</td>
+                                    <td>${courseSelect}</td>
+                                    <td>${course}</td>
+                                    <td>${totalAmount} Rs</td>
+                                </tr>`;
+                        table.innerHTML += row;
+                        data.innerHTML += "Rollno :" + rno + "<br>" +
+                            "Name: " + name + "<br>" +
+                            "Mobile No: " + mono + "<br>" +
+                            "Email: " + email + "<br>" +
+                            "Course  type: " + courseSelect + "<br>" +
+                            "Courses : " + course + "<br>" +
+                            "Total Amount : " + totalAmount + "<br><br>";
+                            
+                        document.getElementById("rno").value = "";
+                        document.getElementById("name").value = "";
+                        document.getElementById("Mobile").value = "";
+                        document.getElementById("email").value = "";
+                        document.getElementById("courseSelect").selectedIndex = 0;
+                        document.getElementsByName("checkbox").forEach(function(checkbox) {
+                            checkbox.checked = false;
+                        });
+                        var gen = document.getElementsByName("gender");
+                        gen[0].checked = false;
+                        gen[1].checked = false;
+                        var userKey = "_rollno" + rno;
+                        var userData = {
+                            name: name,
+                            mobile: mono,
+                            email: email,
+                            courseType: courseSelect,
+                            courses: course,
+                            totalAmount: totalAmount
+                        };
+
+                        localStorage.setItem(userKey, JSON.stringify(userData));
+                        document.cookie = "user=" + rno + "_" + name;
+                }
+
+        function validateForm() {
+            if (!validname() || !validmono() || !validemail() || !validGender() || !validSelect() || !countCourse()) {
+                alert("Please fill out the form correctly.");
+                return false;
+            } else {
+                if(document.cookie.includes(rno + "_" + name)) {
+                    alert("User already exists in cookies.");
+                    return;
+                }
+                alert("Form submitted successfully!");
+                var output = document.getElementById("result");
+            
+                output.innerHTML = "Form submitted successfully!";
+                setTimeout(data, 2000);
+                
+                
+                return true;
+            }
+        }
+
+        function amtCalculate() {
+            var courseSelect = document.getElementById("courseSelect").value;
+            var totalAmount = 0;
+            var totalCourses = countCourse();
+
+            totalAmount = parseInt(courseSelect) + (totalCourses * 100); // Assuming each additional course costs 100 Rs
+            document.getElementById("course").innerHTML += "<br><br>Total Amount: " + totalAmount + " Rs";
+            return totalAmount;
+        }
+    </script>
+</head>
+<body>
+    <!-- <form> -->
+    <label>Rollno : <input type="number" id="rno"></label>
+    <label>Name : <input type="text" id="name" name="name" oninput="validname()">
+    <span id="errname"></span></label><br>
+
+    <label>Mobile no : <input type="text" id="Mobile" name="mono" oninput="validmono()">
+    <span id="errid"></span></label><br>
+
+    <label>Email : <input type="text" id="email" name ="email" oninput="validemail()">
+    <span id="erremail"></span></label><br>
+
+    <label>Gender : <input type="radio" id="male" name="gender">Male <input type="radio" id="female" name="gender"> female
+    <span id="errgen"> </span></label>
+    <br>
+
+    <label>Course : <select id="courseSelect" name="courseSelect" onchange="validSelect()">
+        <option value="-1" name="-">-select course-</option>
+        <option value="1000" name="professional">professional 1000rs</option>
+        <option value="750" name="exclusive">exclusive 750rs</option>
+        <option value="500" name="delux">delux 500rs</option>
+    </select>
+    <span id="errcourse"></span></label><br>
+
+    <label>Course selected : <br>
+    <input type="checkbox" name="checkbox" value="web"  onclick="countCourse()">web<br>
+    <input type="checkbox" name="checkbox" value="java" onclick="countCourse()">java<br>
+    <input type="checkbox" name="checkbox" value="py" onclick="countCourse()">python<br>
+    <input type="checkbox" name="checkbox" value="cpp" onclick="countCourse()">c++<br>
+    <input type="checkbox" name="checkbox" value="cs" onclick="countCourse()">c#<br>
+    <input type="checkbox" name="checkbox" value="php" onclick="countCourse()">php<br>
+    <input type="checkbox" name="checkbox" value="htm" onclick="countCourse()">html<br>
+    <div id="course"></div><br><hr>
+    <input type="button" value="Calculate Amount" onclick="amtCalculate()"> 
+    <button type="submit" onclick="validateForm()">Submit</button>
+    
+    <hr>
+    <div id="result"></div><br><br>
+    <div id="data"></div>
+    <table id="table"></table>
+<!-- </form> -->
+
+</body>
+</html>

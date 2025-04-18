@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<h1>Find any of the alternatives separated with |. global search for any of the specified alternatives (red|green)	</h1>
+<p>Click the button to do a global search for any of the specified alternatives (red|green).</p>
+
+<button onclick="myFunction()">Click</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var str1 = "re, green, red, green, gren, gr, blue, yellow";
+  var pat1 = /(red|green)/g;
+  var result1 = str1.match(pat1);
+  document.getElementById("demo").innerHTML = result1+"<br><br>";
+
+  var str2 = "priyanka,priya,prisha,princy,abc,pqr,pqrr1";
+  var pat2 = /pri/g;
+  var result2 = str2.match(pat2); console.log(result2)
+  document.getElementById("demo").innerHTML +="<br>"+ result2;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Form</title>
+</head>
+
+<body>
+      <form name="form1">
+            <h2> Registration Form </h2>
+
+            <label> Enter Name : </label>
+            <input type="text" id="name" oninput="name_validate()">
+            <span id="errorname" style="color:red;"></span><br><br>
+
+            <label> Enter Email Id : </label>
+            <input type="text" id="email" oninput="email_validate()">
+            <span id="erroremail" style="color:red;"></span><br><br>
+
+            <label> Enter Age : </label>
+            <input type="text" id="age" oninput="age_validate()">
+            <span id="errorage" style="color:red;"></span><br><br>
+
+            <label> Gender : </label>
+            <input type="radio" name="gender" id="male" onclick="validateGender()">Male
+            <input type="radio" name="gender" id="female" onclick="validateGender()">Female
+            <span id="errorgender" style="color:red;"></span><br>
+
+            <p> Course :
+                  <select id="course" name="course" onclick="validateCourses()">
+                        <option value="Select Course"> Select Course </option>
+                        <option value="Javascript"> Javascript </option>
+                        <option value="Data Structure"> Data Structure </option>
+                        <option value="HTML"> HTML </option>
+                        <option value="RDBMS"> RDBMS </option>
+                        <option value="C++"> C++ </option>
+                  </select>
+                  <span id="errorcourse" style="color:red;"></span>
+            </p>
+
+            <p for="hobbies">Hobbies :
+                  <input type="checkbox" name="hobby" value="Reading" id="reading" onclick="validateHobbies()">Reading
+                  <input type="checkbox" name="hobby" value="Singing" id="singing" onclick="validateHobbies()">Singing
+                  <input type="checkbox" name="hobby" value="Travelling" id="travelling" onclick="validateHobbies()">Travelling
+                  <span id="errorhobby" style="color:red;"></span><br><br>
+            </p>
+            <label>Skill Level:</label>
+            <select id="level" onchange="calculateCost()" onclick="validateSkill()">
+                  <option value="0">Select Level</option>
+                  <option value="basic">Basic</option>
+                  <option value="intermediate">Intermediate</option>
+                  <option value="advanced">Advanced</option>
+            </select>
+            <span id="level_error"></span>
+            <br><br>
+
+            Choose Programming Languages :
+            <label><input type="checkbox" name="language" class="language" value="C" onchange="calculateCost()" />
+                  C</label>
+            <label><input type="checkbox" name="language" class="language" value="C++" onchange="calculateCost()" />
+                  C++</label>
+            <label><input type="checkbox" name="language" class="language" value="Java" onchange="calculateCost()" />
+                  Java</label>
+            <label><input type="checkbox" name="language" class="language" value="Python" onchange="calculateCost()" />
+                  Python</label>
+            <span id="lang_err"></span>
+            <br><br>
+            <button type="button" onclick="submitForm()">Submit</button>
+
+      </form>
+
+      <br><br>
+      <h4 id="costCalculation"></h4>
+      <div id="display_invalid" style="color:red;"></div>
+      <br><br>
+      <div id="display2" style="color:green;"></div>
+
+      <script>
+            let name1 = document.getElementById("name");
+            let email1 = document.getElementById("email");
+            let age1 = document.getElementById("age");
+            let male1 = document.getElementById("male");
+            let female1 = document.getElementById("female");
+            let course1 = document.forms["form1"]["course"];
+
+            let inputelement = document.forms["form1"]["hobby"];
+            let totalCost = 0;
+            function validateLanguages() {
+                  let lang = document.getElementsByClassName("language");
+                  if (lang[0].checked == false && lang[1].checked == false && lang[2].checked == false && lang[3].checked == false) {
+                        document.getElementById("lang_err").innerHTML = "Choose atleast one Hobby Languages";
+                        document.getElementById("lang_err").style.color = "red";
+                        return false;
+                  }
+                  else {
+                        document.getElementById("lang_err").innerHTML = "Looks Good...!";
+                        document.getElementById("lang_err").style.color = "green";
+                        return true;
+                  }
+            }
+            function validateSkill() {
+                  let level = document.getElementById("level");
+
+                  if (level.value == '0' || level.value == null) {
+                        document.getElementById("level_error").innerText = "Skill level selection Can not be null or Zero...";
+                        document.getElementById("level_error").style.color = "red";
+                        return false;
+                  } else {
+                        document.getElementById("level_error").innerText = "Looks Good...!";
+                        document.getElementById("level_error").style.color = "green";
+                        return true;
+                  }
+            }
+            function calculateCost() {
+                  const level = document.getElementById("level").value;
+                  const languageCheckboxes = document.querySelectorAll(".language:checked");
+                  // Getting the checked Values With Help QuerySelectorAll...
+                  // .language:checked where :cheked is psuedo element
+                  //document.getElementsByClassName("language:checked"); will not work 
+                  // getElementsByClassName will look for the exact name...
+                  //getElementsByClassName doesn't allow to have the psuedo element
+                  let basePrice = 0;
+                  if (level === "basic") basePrice = 300;
+                  else if (level === "intermediate") basePrice = 500;
+                  else if (level === "advanced") basePrice = 800;
+
+                  totalCost = basePrice * languageCheckboxes.length;
+                  document.getElementById("costCalculation").innerText = `Total Cost is : ${totalCost}`;
+            }
+            function name_validate() {
+                  let namepattern = /^[A-Za-z]{2,}$/;
+                  if (name1.value == "") {
+                        document.getElementById("errorname").innerHTML = "Name Should Not be Empty";
+                        document.getElementById("errorname").style.color = "red";
+                        return false;
+                  }
+                  else if (namepattern.test(name1.value) == false) {
+                        document.getElementById("errorname").innerHTML = "Name Should be Characters Only";
+                        document.getElementById("errorname").style.color = "red";
+                        return false;
+                  }
+                  else {
+                        document.getElementById("errorname").innerHTML = "Name is Correct";
+                        document.getElementById("errorname").style.color = "green";
+                        return true;
+                  }
+            }
+            function email_validate() {
+                  // for mobile pattern = /^[789]{3}[0-9]{7}$/;
+                  // (123) 456-7890 = /^\(\d\d\d\) \d\d\d-\d\d\d\d$/
+
+                  let emailPattern = /^[a-zA-Z0-9._-]+@[a-z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                  if (email1.value == "") {
+                        document.getElementById("erroremail").innerHTML = "Email Should Not be Empty";
+                        document.getElementById("erroremail").style.color = "red";
+                        return false;
+                  }
+                  else if (emailPattern.test(email1.value) == false) {
+                        document.getElementById("erroremail").innerHTML = "Invalid Email Format";
+                        document.getElementById("erroremail").style.color = "red";
+                        return false;
+                  }
+                  else {
+                        document.getElementById("erroremail").innerHTML = "Correct Email Format";
+                        document.getElementById("erroremail").style.color = "green";
+                        return true;
+                  }
+            }
+            function age_validate() {
+                  let agepattern = /^[0-9]{2}$/;
+                  if (age1.value == "") {
+                        document.getElementById("errorage").innerHTML = "Age Should Not be Empty";
+                        document.getElementById("errorage").style.color = "red";
+                        return false;
+                  }
+                  else if (agepattern.test(age1.value) == false) {
+                        document.getElementById("errorage").innerHTML = "Age Should be Numeric and Greater than 9 Only";
+                        document.getElementById("errorage").style.color = "red";
+                        return false;
+                  }
+                  else {
+                        document.getElementById("errorage").innerHTML = "Age is in the Right Criteria...";
+                        document.getElementById("errorage").style.color = "green";
+                        return true;
+                  }
+            }
+            function validateGender() {
+                  let gender = document.getElementsByName("gender");
+                  if (gender[0].checked == false && gender[1].checked == false) {
+                        document.getElementById("errorgender").innerHTML = "Please select gender properly.";
+                        document.getElementById("errorgender").style.color = "red";
+                        return false;
+                  }
+                  else {
+                        document.getElementById("errorgender").innerHTML = "looks Good !";
+                        document.getElementById("errorgender").style.color = "green";
+                        return true;
+                  }
+            }
+            function validateHobbies() {
+                  let hobby = document.getElementsByName("hobby");
+                  if (hobby[0].checked == false && hobby[1].checked == false && hobby[2].checked == false) {
+                        document.getElementById("errorhobby").innerHTML = "Choose atleast one Hobby";
+                        document.getElementById("errorhobby").style.color = "red";
+                        return false;
+                  }
+                  else {
+                        document.getElementById("errorhobby").innerHTML = "Looks Good...!";
+                        document.getElementById("errorhobby").style.color = "green";
+                        return true;
+                  }
+            }
+            function validateCourses() {
+                  let courses = document.getElementById("course");
+
+                  if (courses.value == 'Select Course' || courses.value == null) {
+                        document.getElementById("errorcourse").innerText = "Course selection Can not be null or Zero...";
+                        document.getElementById("errorcourse").style.color = "red";
+                        return false;
+                  } else {
+                        document.getElementById("errorcourse").innerText = "Looks Good...!";
+                        document.getElementById("errorcourse").style.color = "green";
+                        return true;
+                  }
+            }
+            //This is for the From Level Validation
+            function submitForm() {
+                  let isValid = true;
+                  if (!name_validate()) isValid = false;
+                  if (!email_validate()) isValid = false;
+                  if (!age_validate()) isValid = false;
+                  if (!validateGender()) isValid = false;
+                  if (!validateHobbies()) isValid = false;
+                  if (!validateCourses()) isValid = false;
+                  if (!validateSkill()) isValid = false;
+                  if (!validateLanguages()) isValid = false;
+
+                  if (isValid) {
+                        document.getElementById("display_invalid").innerText = "Form is valid!";
+                        document.getElementById("display_invalid").style.color = "green";
+
+                        // Get values
+                        // Check if the 'male1' radio button is selected. If yes, gender is "Male", otherwise it's "Female".
+                        let gender;
+                        if (male1.checked) {
+                              gender = "Male";
+                        } else {
+                              gender = "Female";
+                        }
+
+                        // Get all checkboxes with name "hobby", check which ones are selected, and collect their values.
+
+                        let hobbies = "";
+                        let hobbyElements = document.getElementsByName("hobby");
+                        for (let i = 0; i < hobbyElements.length; i++) {
+                              if (hobbyElements[i].checked) {
+                                    hobbies += hobbyElements[i].value + ", ";
+                              }
+                        }
+                        // Remove the last comma and space if any hobby is selected
+                        if (hobbies.endsWith(", ")) {
+                              hobbies = hobbies.slice(0, -2);
+                        }
+
+                        // Get all checkboxes with class "language", check which ones are selected, and collect their values.
+                        let languages = "";
+                        let languageElements = document.getElementsByClassName("language");
+                        for (let i = 0; i < languageElements.length; i++) {
+                              if (languageElements[i].checked) {
+                                    languages += languageElements[i].value + ", ";
+                              }
+                        }
+                        // Remove the last comma and space if any language is selected
+                        if (languages.endsWith(", ")) {
+                              languages = languages.slice(0, -2);
+                        }
+
+                        // Get the selected value from the course dropdown or input
+                        let course = course1.value;
+
+                        // Get the selected value from the level dropdown
+                        let level = document.getElementById("level").value;
+
+
+                        // LocalStorage
+                        localStorage.setItem("name", name1.value);
+                        localStorage.setItem("email", email1.value);
+                        localStorage.setItem("gender", gender);
+                        localStorage.setItem("hobbies", hobbies);
+                        localStorage.setItem("languages", languages);
+                        localStorage.setItem("course", course);
+                        localStorage.setItem("level", level);
+
+                        // SessionStorage
+                        sessionStorage.setItem("totalCost", totalCost);
+                        sessionStorage.setItem("name", name1.value);
+                        sessionStorage.setItem("email", email1.value);
+                        sessionStorage.setItem("gender", gender);
+                        sessionStorage.setItem("hobbies", hobbies);
+                        sessionStorage.setItem("languages", languages);
+                        sessionStorage.setItem("course", course);
+                        sessionStorage.setItem("level", level);
+
+                        // Cookies
+                        document.cookie = `age=${age1.value}; max-age=300; path=/`;
+                        setCookie("name", name1.value);
+                        setCookie("email", email1.value);
+                        setCookie("gender", gender);
+                        setCookie("hobbies", hobbies);
+                        setCookie("languages", languages);
+                        setCookie("course", course);
+                        setCookie("level", level);
+                        setCookie("totalCost", totalCost);
+                        let tableHTML = `
+        <h3>Submitted Data:</h3>
+        <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse;color: black">
+                   <tr>
+                        <th>Name</th>
+                        <td>${name1.value}</td>
+                  </tr>
+                  <tr>
+                        <th>Email</th>
+                        <td>${email1.value}</td>
+                  </tr>
+                  <tr>
+                        <th>Age</th>
+                        <td>${age1.value}</td>
+                  </tr>
+                  <tr>
+                        <th>Gender</th>
+                        <td>${gender}</td>
+                  </tr>
+                  <tr>
+                        <th>Hobbies</th>
+                        <td>${hobbies}</td>
+                  </tr>
+                  <tr>
+                        <th>Languages</th>
+                        <td>${languages}</td>
+                  </tr>
+                  <tr>
+                        <th>Course</th>
+                        <td>${course}</td>
+                  </tr>
+                  <tr>
+                        <th>Level</th>
+                        <td>${level}</td>
+                  </tr>
+                  <tr>
+                        <th>Total Cost</th>
+                        <td>${totalCost}</td>
+                  </tr>
+                   </table>
+                  `;
+                        document.getElementById("display2").innerHTML = tableHTML;
+
+                        console.log("LocalStorage:", localStorage);
+                        console.log("SessionStorage:", sessionStorage);
+                        console.log("Cookies:", document.cookie);
+                  } else {
+                        document.getElementById("display_invalid").innerText = "Form is not valid!";
+                        document.getElementById("display_invalid").style.color = "red";
+                  }
+            }
+
+            function setCookie(name, value, maxAgeInSeconds = 3600) {
+                  document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; max-age=${maxAgeInSeconds}; path=/`;
+            }
+            //DYNAMIC CHECKBOX AND RADIOBUTTON VALIDATION
+            // document.querySelectorAll('input[name=gender]').forEach(gender => gender.onclick = validateGender);
+            // document.querySelectorAll('input[name=hobby]').forEach(hobby => hobby.onclick = validateHobbies);
+            document.querySelectorAll('input[name=language]').forEach(language => language.onclick = validateLanguages);
+      </script>
+</body>
+
+</html>

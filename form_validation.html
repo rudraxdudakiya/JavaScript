@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information Form</title>
+    <style>
+        body{
+            background-color: powderblue;
+        }
+        h1{
+            color: black;
+            text-align: center;
+            text-decoration-line: underline;
+            font-weight: bolder;
+            font-style: italic;
+        }
+        legend{
+            font-weight: bold;
+        }
+        select{
+            width: 150px;
+            height: 25px;
+            text-align: center;
+        }
+        button{
+            margin-left: 15px;
+            width: 150px;
+            height: 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+        th{
+            padding: 5px;
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Information Form</h1>
+    <fieldset>
+        <legend>Taking Student Data</legend><br>
+        Enter SPID : <input type="text" id="spid" oninput="validateSpid()">&nbsp;&nbsp;&nbsp;<span id="spid_err"></span><br><br>
+        Enter Roll No. : <input type="text" id="rno" oninput="validateRollNo()">&nbsp;&nbsp;&nbsp;<span id="rno_err"></span><br><br>
+        Enter Name : <input type="text" id="name" oninput="validateName()">&nbsp;&nbsp;&nbsp;<span id="name_err"></span><br><br>
+        Select Semester : 
+        <select name="sem" id="sem" onclick="validateSem()">
+            <option value="0">-Select Sem-</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+        </select>&nbsp;&nbsp;&nbsp;<span id="sem_err"></span><br><br>
+        Select Division : 
+        <select name="div" id="div" onclick="validateDiv()">
+            <option value="0">-Select Div-</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select>&nbsp;&nbsp;&nbsp;<span id="div_err"></span><br><br>
+        Enter Age : <input type="number" id="age" oninput="validateAge()">&nbsp;&nbsp;&nbsp;<span id="age_err"></span><br><br>
+        Select Gender : 
+        <input type="radio" name="gender" value="Male" oninput="validateGender()">Male 
+        <input type="radio" name="gender" value="Female" oninput="validateGender()"> Female 
+        &nbsp;&nbsp;&nbsp;<span id="gender_err"></span><br><br>
+        Enter Email Id : <input type="text" id="email" oninput="validateEmail()">&nbsp;&nbsp;&nbsp;<span id="email_err"></span><br><br>
+        Enter Mobile No. : <input type="number" id="mno" oninput="validateMobileNo()">&nbsp;&nbsp;&nbsp;<span id="mno_err"></span><br><br>
+        Enter LINKEDIN Profile URL : <input type="text" id="url" oninput="validateUrl()">&nbsp;&nbsp;&nbsp;<span id="url_err"></span><br><br>
+        Enter Username : <input type="text" id="username" oninput="validateUserName()">&nbsp;&nbsp;&nbsp;<span id="username_err"></span><br><br>
+        Enter Password : <input type="password" id="password" oninput="validatePassword()">&nbsp;&nbsp;&nbsp;<span id="password_err"></span><br><br>
+        Confirm Password : <input type="password" id="cpassword" oninput="validateRepassword()">&nbsp;&nbsp;&nbsp;<span id="cpassword_err"></span><br><br>
+        Choose Programming Languages :
+        <input type="checkbox" name="lang[]" value="C"> C 
+        <input type="checkbox" name="lang[]" value="C++"> C++
+        <input type="checkbox" name="lang[]" value="HTML"> HTML 
+        <input type="checkbox" name="lang[]" value="CSS"> CSS 
+        <input type="checkbox" name="lang[]" value="JAVASCRIPT"> JAVASCRIPT
+        <input type="checkbox" name="lang[]" value="PYTHON"> PYTHON
+        &nbsp;&nbsp;&nbsp;<span id="lang_err"></span><br><br>
+        Select State : 
+        <select name="state" id="state" onclick="validateState()" onchange="fillCity()">
+            <option value="0">-Select State-</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Maharashtra">Maharashtra</option>
+        </select>&nbsp;&nbsp;&nbsp;<span id="state_err"></span><br><br>
+        Select City :
+        <select name="city" id="city" onclick="validateCity()"></select>&nbsp;&nbsp;&nbsp;<span id="city_err"></span><br><br>
+        <button onclick="validate()">Submit Data</button>
+        <button onclick="remove()">Remove Data</button>
+    </fieldset><br>
+
+    <fieldset>
+        <legend>Show Student Data</legend>
+        <table id="tbl" border="3">
+            <tr>
+                <th>SPID</th>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Sem</th>
+                <th>Div</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Email Id</th>
+                <th>Mobile No</th>
+                <th>LinkedIn</th>
+                <th>Username</th>
+                <th>Languages</th>
+                <th>State</th>
+                <th>City</th>
+            </tr>
+        </table>
+    </fieldset>
+
+    <script src="form_validation_script.js"></script></body>
+</html>

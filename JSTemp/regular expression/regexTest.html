@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var inputtxt="1111111111"
+        // var phoneno = /^\d{10}$/;
+        // //var phoneno = /^[789]{1}\d{9}$/;
+        //   if(inputtxt.match(phoneno))
+        //         {
+        //      		console.log(inputtxt.match(phoneno))
+        //      		console.log("true")
+        //         }
+        //       else
+        //         {
+        //         	console.log("false");        
+        //         }
+        
+        // console.log( "Java1 Javascript Hello, Java Java1".match(/\bJava/g) ); //Java,Java,Java
+        // console.log( "Hello, Java JavaScript!".match(/\bJava\b/) );
+        // //['Java1','Javascript','Java','Java1']
+        const text = "A quick fox";
+        const regexpLastWord = /\w+$/; // find last word in a string
+        console.log(text.match(regexpLastWord)); // Array ["fox"]
+        
+        // const regexpWords = /\b\w+\b/g; 
+        // //to split string into words- match word char at beginning and ending of each word
+        // console.log(text.match(regexpWords));
+        // // expected output: Array ["A", "quick", "fox"]
+        
+        // const regexpFoxQuality = /\w+(?= fox)/; 
+        // //string that is followed by a specific string 
+        // console.log(text.match(regexpFoxQuality));
+        // // expected output: Array ["quick"]
+        
+        // let fruits = ["Apple", "Watermelon", "Orange", "Avocado", "Strawberry"];
+        // // Select fruits started with 'A' by /^A/ Regex.
+        // // Here '^' control symbol used only in one role: Matching begining of an input.
+        // let fruitsStartsWithA = 
+        // fruits.filter(fruit => /^A/.test(fruit));
+        
+        // console.log(fruitsStartsWithA); // [ 'Apple', 'Avocado' ]
+        
+        // var text1="string String1 that 122 is 10 1 followed"
+        // const regexpWords1 = /\b\d+\b/g; //to get all numbers in string
+        // //const regexpWords1 = /\b\w+\b/g; //to split string into words
+        // var arr=text1.match(regexpWords1)
+        // console.log(arr)
+        // // console.log(arr.filter(e1=>/^s/i.test(e1)))
+        
+        let input = "A string with 333 numbers in it... 42 and 88.";
+        let numberRE = /\b\d+\b/g; //get numbers from string
+        console.log(input.match(numberRE))
+        let num;
+        // match = numberRE.exec(input) //g is compulsary
+        // console.log(match)
+        // match = numberRE.exec(input)
+        // console.log(match)
+        // match = numberRE.exec(input)
+        // console.log(match)
+        // match = numberRE.exec(input)
+        // console.log(match)
+        // while (num = numberRE.exec(input)) {
+        // console.log("Found", num[0], "at", num.index, " + ",numberRE.lastIndex);
+        // }
+        const mailformat = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        console.log(mailformat.test("user1@gmail.com"))
+        </script>   
